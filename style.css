@@ -1,0 +1,33 @@
+/* body {
+    background: url(images/bg-image.jpg) no-repeat;
+    background-size: cover;
+    height: 100vh;
+} */
+
+.menu-layout{
+    margin: 0 20px;
+    border: 1px solid lightsalmon;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px gray;
+    border-radius: 5px;
+}
+.menu-layout:hover{
+    border: 3px solid lightsalmon;
+}
+
+#main-chart{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+}
+
+#img{
+    width:400px;
+}
+.details-view{
+    margin-left: 50px;
+    display: inline-block;
+    margin-bottom: 40px;
+    box-shadow: 5px 5px 5px lightslategray;
+}

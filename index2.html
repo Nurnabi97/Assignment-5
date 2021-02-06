@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Hungry Monster</title>
+</head>
+
+<body>
+    <div class="container">
+        <form class="col-md-6 m-auto py-5">
+            <div class="input-group mb-3">
+                <input id="input-field" type="text" class="form-control" placeholder="Search for Meal...">
+                <div class="input-group-append">
+                    <button onclick="searchBtn()" type="button" class="btn btn-danger">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="menu-details"></div>
+    <div id="main-chart"></div>
+    <script>
+        fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+            .then(res => res.json())
+            .then(data => allMeal(data.categories))
+
+
+        function allMeal(data) {
+            const mainDiv = document.getElementById('main-chart');
+            for (let i = 0; i < data.length; i++) {
+                const meal = data[i];
+                const menuDiv = document.createElement('div');
+                const mealInfo = `
+                <div onclick="menuDetails('${meal.strCategory}')" class="menu-layout"><img id="image" src="${meal.strCategoryThumb}"><h2>${meal.strCategory}</h2></div>
+                `;
+                menuDiv.innerHTML = mealInfo;
+                mainDiv.appendChild(menuDiv);
+
+
+            }
+        };
+
+        const menuDetails = (mealName => {
+            const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`
+            console.log(url);
+            fetch(url)
+                .then(res => res.json())
+                .then(detail => displayDetails(detail.meals))
+        })
+
+        const displayDetails = (menu => {
+            const menuDetails = document.getElementById('menu-details');
+            console.log(menu);
+            menu.forEach(menus => {
+                console.log(menus.strCategory);
+
+                menuDetails.innerHTML = `<div class="details-view">
+                <img id='img' src="${menus.strMealThumb}">
+                <h1>Name: ${menus.strCategory}</h1>
+                <h2>StrArea: ${menus.strArea}</h2>
+                <h2>IdMeal: ${menus.idMeal}</h2>
+               </div> `;
+
+            });
+         
+        })
+
+
+    </script>
+</body>
+
+</html>
