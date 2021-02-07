@@ -32,22 +32,20 @@ const menuDetail = (mealName => {
     console.log(url);
     fetch(url)
         .then(res => res.json())
-        
+
         .then(data => displayDetails(data.meals))
-        // console.log(data)
 });
 
 const displayDetails = (menu => {
     const menuDetails = document.getElementById('menu-details');
-    // console.log(menu);
     menu.forEach(menus => {
-        // console.log(menu);
-   
         menuDetails.innerHTML = `<div class="details-view">
         <img id='img' src="${menus.strMealThumb}">
         <h1>Name: ${menus.strMeal}</h1>
         <h2>StrArea: ${menus.strArea}</h2>
         <h2>IdMeal: ${menus.idMeal}</h2>
-       </div> `;   
+       </div> `;
     });
 });
+
+// End //
